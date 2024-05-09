@@ -13,5 +13,6 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::view('posts/create', 'posts.create')->middleware(['auth', 'verified']);
+Route::view('posts/{post}/edit', 'posts.edit')->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

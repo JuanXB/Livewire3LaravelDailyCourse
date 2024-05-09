@@ -8,11 +8,22 @@ use Livewire\Form;
 
 class PostForm extends Form
 {
+    public ?Post $post;
+
     #[Validate('required|min:5')]
     public string $title = '';
 
     #[Validate('required|min:5')]
     public string $body = '';
+
+    public function setPost(Post $post) 
+    {
+        $this->post = $post;
+ 
+        $this->title = $post->title;
+ 
+        $this->body = $post->body;
+    }
 
     public function save(): void 
     {
@@ -20,4 +31,9 @@ class PostForm extends Form
  
         $this->reset('title', 'body');
     } 
+
+    public function update()
+    {
+        $this->post->update($this->all());
+    }
 }
