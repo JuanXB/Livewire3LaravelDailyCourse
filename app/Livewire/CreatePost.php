@@ -3,9 +3,8 @@
 namespace App\Livewire;
 
 use App\Livewire\Forms\PostForm;
-use App\Models\Post;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class CreatePost extends Component
 {
@@ -32,6 +31,13 @@ class CreatePost extends Component
     public function validateTitle(): void
     {
         $this->validateOnly('postForm.title');
+    }
+
+    public function updated($property): void
+    {
+        if ($property == 'postForm.title') {
+            $this->postForm->title = Str::headline($this->postForm->title);
+        }
     }
 
 }
